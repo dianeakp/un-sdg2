@@ -10,9 +10,8 @@ export class unSdg extends DDDSuper(LitElement) {
     // initializes properties so tit can be a blank canvas for the user to assign values to
     super();
     this.goal = "circle";
-    this.img = "";
+    this.img = "../lib/svgs/circle.png";
     //allows us use and access svgs by creating a link to it in the system.
-    //import.meta.url allows us establish a path relative to where we are right now
     //../ means get out or src and find lib
     this.alt = "Sustainable Developments Logo";
     this.colorOnly = false;
@@ -42,47 +41,45 @@ export class unSdg extends DDDSuper(LitElement) {
         :host {
           display: block;
 
-          // ensures the svgs and colors are in uniform squares
+          // ensures the svgs and colors are uniform and are positioned after eachother
         }
       `,
     ];
   }
 
   updated(changedProperties) {
-    //runs whenever something is updated
+    //runs whenever something is updated and ensures they retain their properties
 
-    //this does...
-
+    //this keeps height and width the same
     if (changedProperties.has("--height")) {
       height = this.height;
     }
-
     if (changedProperties.has("--width")) {
       width = this.width;
     }
 
-    //this does...
+    //if the goal is changed, it runs the updateGoalInfo() method
     if (changedProperties.has("goal")) {
       this.updateGoalInfo(this.goal);
     }
 
-    //this does...
+    //this ensures thar when it is color only the image is not visible
     if (changedProperties.has("colorOnly")) {
       this.isImageVisible = !this.colorOnly;
     }
 
-    //this does...
+    //this ensures loading properties are retained
     if (changedProperties.has("loading")) {
-      this.loading = this.getAttribute("loading"); // || [insert other code]
+      this.loading = this.getAttribute("loading");
     }
 
-    //this does...
+    //this ensures fetch priority properties are retained
     if (changedProperties.has("fetchPriority")) {
-      this.fetchPriority = this.getAttribute("fetchPriority"); // || [insert other code]
+      this.fetchPriority = this.getAttribute("fetchPriority");
     }
   }
 
-  //when a value changes,  function runs
+  //this runs when a goal is changed
   updateGoalInfo(currGoal) {
     //checks for the value it was given and updates or assigns img, alt text and color as needed
     switch (currGoal) {
@@ -207,8 +204,8 @@ export class unSdg extends DDDSuper(LitElement) {
   }
 
   render() {
-    //it takes the attribute of .goal and plugs it into the link
     return html` <style>
+        /* this ensures the width height and color properties are correct*/
         :host {
           width: ${this.width};
           height: ${this.height};
